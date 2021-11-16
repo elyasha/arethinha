@@ -4,20 +4,20 @@ import {useState, useEffect} from 'react'
 import './App.css'
 
 export default function App() {
-  const [games, setGames] = useState([])
+  const [pokemons, setPokemons] = useState([])
   
   useEffect(() => {
-    axios.get('https://www.freetogame.com/api/games').then((response) => {
+    axios.get('https://pokeapi.co/api/v2/pokemon/').then((response) => {
       const jsonResponse = response.data
       console.log(jsonResponse)
-      setGames(jsonResponse)
+      setPokemons(jsonResponse.results)
     })
   }, [])
 
   return (
     <main>
       React⚛️ + Vite⚡ + Replit🌀
-      {games}
+      {pokemons.map((pokemon) => <h1 key={pokemon.name}>{pokemon.name}</h1>)}
     </main>
   )
 }
